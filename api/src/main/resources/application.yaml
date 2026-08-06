@@ -1,3 +1,34 @@
 spring:
   application:
-    name: api
+    name: sincrohandover-api
+
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521/FREEPDB1
+    username: system
+    password: Wajubasa1727_
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      pool-name: SincroHikariPool
+      maximum-pool-size: 10
+      connection-timeout: 30000
+
+    jpa:
+      database-platform: org.hibernate.dialect.OracleDialect
+      hibernate:
+        ddl-auto: validate
+      show-sql: true
+      properties:
+        hibernate.format_sql: true
+
+
+
+    server:
+      port: 8080
+
+    logging:
+      level:
+        root: INFO
+        org.springframework.web: INFO
+        org.hibernate.SQL: DEBUG
+        com.zaxxer.hikari.HikariConfig: DEBUG
+
