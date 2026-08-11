@@ -1,4 +1,4 @@
-package com.sincrohandover.api.modules.category.model;
+package com.sincrohandover.api.modules.category.domain.model;
 
 
 import com.sincrohandover.api.shared.domain.BaseEntity;
@@ -22,7 +22,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class Category  extends BaseEntity {
-    
+
 
     @Column(name = "name", nullable = false, length = 100)
     private String name;
