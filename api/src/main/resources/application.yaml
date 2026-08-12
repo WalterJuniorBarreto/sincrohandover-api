@@ -12,23 +12,24 @@ spring:
       maximum-pool-size: 10
       connection-timeout: 30000
 
-    jpa:
-      database-platform: org.hibernate.dialect.OracleDialect
-      hibernate:
-        ddl-auto: validate
-      show-sql: true
-      properties:
-        hibernate.format_sql: true
+  # jpa debe estar al mismo nivel que datasource (adentro de spring)
+  jpa:
+    database-platform: org.hibernate.dialect.OracleDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+      hibernate.jdbc.time_zone: UTC
 
+# server y logging deben estar al nivel raíz (pegados a la izquierda, igual que spring)
+server:
+  port: 8080
 
-
-    server:
-      port: 8080
-
-    logging:
-      level:
-        root: INFO
-        org.springframework.web: INFO
-        org.hibernate.SQL: DEBUG
-        com.zaxxer.hikari.HikariConfig: DEBUG
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
+    com.zaxxer.hikari.HikariConfig: DEBUG
 
