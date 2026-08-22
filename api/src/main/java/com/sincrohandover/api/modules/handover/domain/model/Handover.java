@@ -17,7 +17,15 @@ import org.hibernate.type.SqlTypes;
  * para heredar el ID (UUID) y la precisión temporal (createdAt en UTC).
  */
 @Entity
-@Table(name = "handover")
+@Table(
+        name = "handover",
+        indexes = {
+                @Index(name = "idx_handover_project", columnList = "project_id"),
+                @Index(name = "idx_handover_author", columnList = "author_id"),
+                @Index(name = "idx_handover_category", columnList = "category_id"),
+                @Index(name = "idx_handover_proj_status", columnList = "project_id, status")
+        }
+)
 @Getter
 @Setter
 @NoArgsConstructor

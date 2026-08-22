@@ -18,23 +18,20 @@ public class JpaSmokeTestRunner implements CommandLineRunner {
 
     private final EntityManager entityManager;
 
-    public JpaSmokeTestRunner(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
-
+    public JpaSmokeTestRunner(EntityManager entityManager) { this.entityManager = entityManager; }
 
     @Override
     @Transactional(readOnly = true)
     public void run(String... args) throws Exception {
-        log.info("Iniciando SMoke tEST de JPA y EntityManager (ddl-auto: updateble");
+        log.info("Iniciando smoke test de jpa y entitymanager");
         try{
             entityManager.createQuery("SELECT c.id FROM Category c").setMaxResults(1).getResultList();
-            entityManager.createQuery("SELECT h.id FROM Handover h").setMaxResults(1).getResultList();
-            log.info("Smoke Test superado: Entidades mapeadas correctamente y el esquema fisico cuadra a la perfeccion");
+            entityManager.createQuery("SELECT c.id FROM Handover c").setMaxResults(1).getResultList();
+            log.info("smoke test superado: entidades mapeadas correctamente y el esquema fisico cuadra a la perfeccion");
         } catch (Exception e){
-            log.error("Fallo critico en el Smoke Test de JPA: {}", e.getMessage());
-            throw  e;
+            log.error("Fallo critico en el smoke test de jpa: {}", e.getMessage());
+            throw e;
         }
-    }
 
+    }
 }

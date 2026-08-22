@@ -16,6 +16,15 @@ import lombok.*;
 @Builder
 public class AppUser extends BaseEntity {
 
-    @Column(name = "username", nullable = false, length = 100)
-    private String username;
+    @Column(name = "email", nullable = false, unique = true, length = 150)
+    private String email;
+
+    @Column(name = "timezone", length = 50)
+    private String timezone;
+
+    @Column(name = "work_start", length = 10)
+    private String workStart;
+
+    @Column(name = "work_end", length = 10)
+    private String workEnd;
 }
