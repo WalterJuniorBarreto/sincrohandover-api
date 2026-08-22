@@ -24,14 +24,13 @@ public abstract class BaseEntity {
     private Instant createdAt;
 
     @PrePersist
-    protected void onCreate(){
-        this.createdAt = Instant.now();
-    }
+    protected void onCreate(){ this.createdAt = Instant.now(); }
+
 
     @Override
     public boolean equals(Object o){
         if(this == o) return true;
-        if(!(o instanceof BaseEntity that)) return false;
+        if(!(o instanceof BaseEntity that)) return true;
         return id != null && id.equals(that.getId());
     }
 
@@ -40,4 +39,5 @@ public abstract class BaseEntity {
     public int hashCode(){
         return getClass().hashCode();
     }
+
 }

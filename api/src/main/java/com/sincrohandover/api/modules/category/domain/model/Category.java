@@ -14,6 +14,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+/**
+ * Entidad de Dominio: Category
+ *
+ * Representa la tabla física 'category' en Oracle Database.
+ *
+ * NOTA ARQUITECTÓNICA (Lean Model / YAGNI):
+ * El modelo de datos de esta entidad fue ajustado estrictamente para
+ * mantener únicamente el 'id', 'createdAt' (heredados) y 'name'.
+ * La columna 'description' fue removida intencionalmente del modelo
+ * para optimizar el peso de las consultas SQL, reducir el consumo de
+ * memoria en la JVM y agilizar la transferencia del payload.
+ */
+
 @Entity
 @Table(name = "category")
 @Getter
@@ -21,12 +35,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Category  extends BaseEntity {
-
+public class Category extends BaseEntity{
 
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-    // Nota Arquitectónica: Modelo optimizado intencionalmente.
-    // No se incluye columna de descripción para mantener el payload esbelto.
 }
