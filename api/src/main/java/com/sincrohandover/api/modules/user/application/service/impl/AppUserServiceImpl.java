@@ -1,6 +1,6 @@
-package com.sincrohandover.api.modules.category.application.service.impl;
+package com.sincrohandover.api.modules.user.application.service.impl;
 
-import com.sincrohandover.api.modules.category.application.service.AppUserService;
+import com.sincrohandover.api.modules.user.application.service.AppUserService;
 import com.sincrohandover.api.modules.user.application.dto.AppUserRequest;
 import com.sincrohandover.api.modules.user.application.dto.AppUserResponse;
 import com.sincrohandover.api.modules.user.application.mapper.AppUserMapper;
@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.management.ReflectionException;
 
 @Slf4j
 @Service
@@ -39,6 +41,9 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
 
+
+
+
     @Override
     @Transactional(readOnly = true)
     public AppUserResponse getByEmail(String email){
@@ -53,4 +58,6 @@ public class AppUserServiceImpl implements AppUserService {
 
         return appUserMapper.toResponse(user);
     }
+
+
 }

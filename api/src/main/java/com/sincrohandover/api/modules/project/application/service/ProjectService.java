@@ -1,4 +1,4 @@
-package com.sincrohandover.api.modules.category.application.service;
+package com.sincrohandover.api.modules.project.application.service;
 
 import com.sincrohandover.api.modules.project.application.dto.ProjectRequest;
 import com.sincrohandover.api.modules.project.application.dto.ProjectResponse;

@@ -1,7 +1,7 @@
-package com.sincrohandover.api.modules.category.application.service.impl;
+package com.sincrohandover.api.modules.project.application.service.impl;
 
 
-import com.sincrohandover.api.modules.category.application.service.ProjectService;
+import com.sincrohandover.api.modules.project.application.service.ProjectService;
 import com.sincrohandover.api.modules.project.application.dto.ProjectRequest;
 import com.sincrohandover.api.modules.project.application.dto.ProjectResponse;
 import com.sincrohandover.api.modules.project.application.mapper.ProjectMapper;

@@ -1,6 +1,6 @@
-package com.sincrohandover.api.modules.category.application.service.impl;
+package com.sincrohandover.api.modules.handover.application.service.impl;
 
-import com.sincrohandover.api.modules.category.application.service.HandoverService;
+import com.sincrohandover.api.modules.handover.application.service.HandoverService;
 import com.sincrohandover.api.modules.category.domain.model.Category;
 import com.sincrohandover.api.modules.category.infrastructure.persistence.CategoryRepository;
 import com.sincrohandover.api.modules.handover.application.dto.HandoverRequest;
@@ -10,7 +10,6 @@ import com.sincrohandover.api.modules.handover.domain.model.Handover;
 import com.sincrohandover.api.modules.handover.infrastructure.persistence.HandoverRepository;
 import com.sincrohandover.api.modules.project.domain.model.Project;
 import com.sincrohandover.api.modules.project.infrastructure.persistence.ProjectRepository;
-import com.sincrohandover.api.modules.user.application.dto.AppUserResponse;
 import com.sincrohandover.api.modules.user.domain.model.AppUser;
 import com.sincrohandover.api.modules.user.infrastructure.persistence.AppUserRepository;
 import lombok.RequiredArgsConstructor;
