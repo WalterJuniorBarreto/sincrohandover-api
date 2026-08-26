@@ -27,3 +27,5 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryMapper.toResponse(savedCategory);
     }
 }
+
+

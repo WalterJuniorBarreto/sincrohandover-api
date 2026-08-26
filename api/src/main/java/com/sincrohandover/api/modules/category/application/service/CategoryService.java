@@ -6,3 +6,5 @@ import com.sincrohandover.api.modules.category.application.dto.CategoryResponse;
 public interface CategoryService {
     CategoryResponse createCategory(CategoryRequest request);
 }
+
+

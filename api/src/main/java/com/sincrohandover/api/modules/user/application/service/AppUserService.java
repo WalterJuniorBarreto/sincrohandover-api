@@ -1,4 +1,4 @@
-package com.sincrohandover.api.modules.category.application.service;
+package com.sincrohandover.api.modules.user.application.service;
 
 import com.sincrohandover.api.modules.user.application.dto.AppUserRequest;
 import com.sincrohandover.api.modules.user.application.dto.AppUserResponse;
