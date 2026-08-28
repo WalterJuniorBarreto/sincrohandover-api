@@ -12,6 +12,11 @@ spring:
       maximum-pool-size: 10
       connection-timeout: 30000
 
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    time-zone: UTC
+
 
   # jpa debe estar al mismo nivel que datasource (adentro de spring)
   jpa:

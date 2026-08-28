@@ -2,6 +2,10 @@ package com.sincrohandover.api.shared.infrastructure.web;
 
 import com.sincrohandover.api.shared.domain.exception.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.query.sqm.DynamicInstantiationNature;
+import org.jspecify.annotations.Nullable;
+import org.springframework.beans.factory.parsing.Problem;
+import org.springframework.boot.micrometer.observation.autoconfigure.ObservationProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.validation.FieldError;
