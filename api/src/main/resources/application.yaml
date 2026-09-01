@@ -18,6 +18,11 @@ spring:
     time-zone: UTC
 
 
+  logging:
+    pattern:
+      # Formato: Fecha | Nivel | Correlation ID | Hilo | Clase | Mensaje
+      console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p [%X{correlation_id}] [%t] %-40.40logger{39} : %m%n"
+
   # jpa debe estar al mismo nivel que datasource (adentro de spring)
   jpa:
     database-platform: org.hibernate.dialect.OracleDialect

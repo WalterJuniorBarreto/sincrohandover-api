@@ -10,3 +10,4 @@ public record ShiftBoundaries(
         Instant endInstant
 ) {
 }
+

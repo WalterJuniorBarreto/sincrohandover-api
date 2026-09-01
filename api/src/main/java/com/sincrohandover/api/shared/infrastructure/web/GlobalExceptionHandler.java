@@ -4,6 +4,7 @@ import com.sincrohandover.api.shared.domain.exception.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.query.sqm.DynamicInstantiationNature;
 import org.jspecify.annotations.Nullable;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.parsing.Problem;
 import org.springframework.boot.micrometer.observation.autoconfigure.ObservationProperties;
 import org.springframework.http.HttpStatus;
@@ -61,13 +62,20 @@ public class GlobalExceptionHandler{
 
     @ExceptionHandler(Exception.class)
     public ProblemDetail handleAllUncaughtExceptions(Exception ex) {
-        log.error("Error interno no controlado: ", ex);
+        String correlationId = MDC.get("correlation_id");
+        log.error("Error interno no controlado, COrrelation-ID: {}", correlationId, ex);
 
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, "Ha ocurrido un error inesperado en el servidor. Contacte a soporte técnico.");
         problemDetail.setType(URI.create("https://api.sincrohandover.com/errors/internal-server-error"));
         problemDetail.setTitle("Internal Server Error");
         problemDetail.setProperty("timestamp", Instant.now());
 
+        problemDetail.setProperty("trace_id", correlationId);
+
         return problemDetail;
     }
+
 }
+
+
+
