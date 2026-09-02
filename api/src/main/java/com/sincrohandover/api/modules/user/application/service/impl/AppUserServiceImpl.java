@@ -44,6 +44,9 @@ public class AppUserServiceImpl implements AppUserService {
 
 
 
+
+
+
     @Override
     @Transactional(readOnly = true)
     public AppUserResponse getByEmail(String email){
