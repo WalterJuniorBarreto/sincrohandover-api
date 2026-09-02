@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: sincrohandover-api
+
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521/FREEPDB1
+    username: system
+    password: Wajubasa1727_
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      pool-name: SincroHikariPool
+      maximum-pool-size: 10
+      connection-timeout: 30000
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    time-zone: UTC
+
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+
+  logging:
+    pattern:
+      # Formato: Fecha | Nivel | Correlation ID | Hilo | Clase | Mensaje
+      console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p [%X{correlation_id}] [%t] %-40.40logger{39} : %m%n"
+
+  # jpa debe estar al mismo nivel que datasource (adentro de spring)
+  jpa:
+    database-platform: org.hibernate.dialect.OracleDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+      hibernate.jdbc.time_zone: UTC
+
+
+# server y logging deben estar al nivel raíz (pegados a la izquierda, igual que spring)
+server:
+  port: 8080
+
+
+
+  tomcat:
+    max-http-form-post-size: 2MB
+    max-swallow-size: 2MB
+
+logging:
+  lever:
+    root: INFOR
+    org.springframework.web: INFO
+    org.hibernate.sql: DEBUG
+    com.zaxxer.hikari.HikariConfig: DEBUG
