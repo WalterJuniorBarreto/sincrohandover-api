@@ -17,6 +17,10 @@ spring:
       write-dates-as-timestamps: false
     time-zone: UTC
 
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
 
   logging:
     pattern:
@@ -37,6 +41,12 @@ spring:
 # server y logging deben estar al nivel raíz (pegados a la izquierda, igual que spring)
 server:
   port: 8080
+
+
+
+  tomcat:
+    max-http-form-post-size: 2MB
+    max-swallow-size: 2MB
 
 logging:
   lever:
