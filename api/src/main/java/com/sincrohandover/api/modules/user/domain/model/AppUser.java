@@ -5,6 +5,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalTime;
 
 
 @Entity
@@ -23,8 +26,8 @@ public class AppUser extends BaseEntity {
     private String timezone;
 
     @Column(name = "work_start", length = 10)
-    private String workStart;
+    private LocalTime workStart;
 
     @Column(name = "work_end", length = 10)
-    private String workEnd;
+    private LocalTime workEnd;
 }

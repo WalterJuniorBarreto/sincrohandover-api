@@ -1,5 +1,6 @@
 package com.sincrohandover.api.shared.infrastructure.web;
 
+import com.sincrohandover.api.shared.domain.exception.OutsideWorkingHoursException;
 import com.sincrohandover.api.shared.domain.exception.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.query.sqm.DynamicInstantiationNature;
@@ -73,6 +74,24 @@ public class GlobalExceptionHandler{
         problemDetail.setProperty("timestamp", Instant.now());
 
         problemDetail.setProperty("trace_id", correlationId);
+
+        return problemDetail;
+    }
+
+    /**
+     * Maneja violaciones de reglas de negocio relacionadas con horarios laborales.
+     * Retorna 400 Bad Request.
+     */
+    @ExceptionHandler(OutsideWorkingHoursException.class)
+    public ProblemDetail handleOutsideWorkingHoursException(OutsideWorkingHoursException ex){
+        log.warn("Violacion de regla de negocio (horario laboral): {}", ex.getMessage());
+
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
+        problemDetail.setType(URI.create("https://api.sincrohandover.com/errors/outside-working-hours"));
+        problemDetail.setTitle("Fuera de Horario Laboral");
+        problemDetail.setProperty("timestamp", Instant.now());
+
+        problemDetail.setProperty("trace_id", MDC.get("correlation_id"));
 
         return problemDetail;
     }

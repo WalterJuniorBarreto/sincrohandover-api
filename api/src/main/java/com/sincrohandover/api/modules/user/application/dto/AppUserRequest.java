@@ -1,7 +1,9 @@
 package com.sincrohandover.api.modules.user.application.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * DTO de Entrada para AppUser.
@@ -14,7 +16,9 @@ public record AppUserRequest(
         String email,
 
         String timezone,
+
         String workStart,
+
         String workEnd
 
 ) {}
