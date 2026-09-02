@@ -1,6 +1,9 @@
 package com.sincrohandover.api.modules.user.application.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.Instant;
+import java.time.LocalTime;
 import java.util.UUID;
 
 /**
