@@ -26,7 +26,6 @@ public abstract class BaseEntity {
     @PrePersist
     protected void onCreate(){ this.createdAt = Instant.now(); }
 
-
     @Override
     public boolean equals(Object o){
         if(this == o) return true;
