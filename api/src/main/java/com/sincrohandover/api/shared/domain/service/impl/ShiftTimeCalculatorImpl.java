@@ -34,6 +34,7 @@ public class ShiftTimeCalculatorImpl implements ShiftTimeCalculator {
             throw new IllegalArgumentException("La zona horaria proporcionada no es valida");
         }
     }
+
 }
 
 

@@ -3,11 +3,7 @@ package com.sincrohandover.api.shared.infrastructure.web;
 import com.sincrohandover.api.shared.domain.exception.OutsideWorkingHoursException;
 import com.sincrohandover.api.shared.domain.exception.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.query.sqm.DynamicInstantiationNature;
-import org.jspecify.annotations.Nullable;
 import org.slf4j.MDC;
-import org.springframework.beans.factory.parsing.Problem;
-import org.springframework.boot.micrometer.observation.autoconfigure.ObservationProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.validation.FieldError;
@@ -44,11 +40,16 @@ public class GlobalExceptionHandler{
         for (FieldError fieldError : ex.getBindingResult().getFieldErrors()){
             errors.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
+
         problemDetail.setProperty("invalid_params", errors);
 
         log.warn("Fallo de validacion de payload: {}", errors);
         return problemDetail;
     }
+
+    Map<String, String> errors = new HashMap<>();
+
+
 
 
 

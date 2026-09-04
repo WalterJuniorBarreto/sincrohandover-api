@@ -1,5 +1,6 @@
 package com.sincrohandover.api.modules.handover.domain.model;
 
+import ch.qos.logback.core.model.NamedModel;
 import com.sincrohandover.api.modules.category.domain.model.Category;
 import com.sincrohandover.api.modules.project.domain.model.Project;
 import com.sincrohandover.api.modules.user.domain.model.AppUser;
