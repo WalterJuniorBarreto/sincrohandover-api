@@ -18,12 +18,13 @@ import com.sincrohandover.api.shared.domain.model.ShiftBoundaries;
 import com.sincrohandover.api.shared.domain.service.ShiftTimeCalculator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.security.PublicKey;
 import java.time.Instant;
-import java.time.LocalTime;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -88,5 +89,15 @@ public class HandoveServiceImpl implements HandoverService {
         return handoverMapper.toResponse(savedHandover);
     }
 
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<HandoverResponse> getHandovers(UUID projectId, String status, Pageable pageable){
+        log.debug("EJecutando consulta paginada de Handovers. FIltros -> Proyecto: {}, Estado: {}", projectId, status);
+
+        return handoverRepository.findByFiltersDynamically(projectId, status, pageable)
+                .map(handoverMapper::toResponse);
+    }
 
 }
