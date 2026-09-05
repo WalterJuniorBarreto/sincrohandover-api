@@ -1,28 +1,29 @@
 package com.sincrohandover.api.modules.handover.infrastructure.persistence;
 
 import com.sincrohandover.api.modules.handover.domain.model.Handover;
-import com.sincrohandover.api.modules.handover.domain.model.HandoverStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface HandoverRepository extends JpaRepository<Handover, UUID> {
 
     /**
-     * Busca todas las entregas (handovers) asociadas a un proyecto específico.
-     * Spring Data navega automáticamente por la relación para comparar el ID.
-     *
-     * @param projectId Identificador único del proyecto.
-     * @return Lista de entregas pertenecientes al proyecto.
+     * DBA & Performance: Consulta dinámica paginada.
+     * Evalúa los parámetros; si son nulos, ignora el filtro.
+     * Se inyecta Pageable para forzar sentencias LIMIT/OFFSET a nivel de SQL.
      */
-    List<Handover> findByProjectId(UUID projectId);
+    @Query("SELECT h FROM Handover h WHERE " +
+            "(:projectId IS NULL OR h.project.id = :projectId) AND " +
+            "(:status IS NULL OR h.status = :status)")
+    Page<Handover> findByFiltersDynamically(
+            @Param("projectId") UUID projectId,
+            @Param("status") String status,
+            Pageable pageable
+    );
 
-    /**
-     * Filtra las entregas según su estado en el ciclo de vida.
-     *
-     * @param status Estado de la entrega (ej. DRAFT, COMPLETED).
-     * @return Lista de entregas que coinciden con el estado indicado.
-     */
-    List<Handover> findByStatus(HandoverStatus status);
+
 }

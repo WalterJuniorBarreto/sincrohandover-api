@@ -6,14 +6,16 @@ import com.sincrohandover.api.modules.handover.application.service.HandoverServi
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -45,4 +47,48 @@ public class HandoverController {
         return ResponseEntity.created(location).body(response);
 
     }
+
+
+
+    /**
+     * Obtiene un listado paginado de Handovers.
+     *
+     * @param projectId (Opcional) Filtro por ID de proyecto.
+     * @param status    (Opcional) Filtro por estado del turno (ej. COMPLETED, DRAFT).
+     * @param pageable  Inyectado automáticamente por Spring. Protegido por PageableDefault.
+     * @return 200 OK con el objeto Page (contenido + metadatos de paginación para Angular).
+     */
+    @GetMapping
+    public ResponseEntity<Page<HandoverResponse>> getHandovers(
+            @RequestParam(required = false) UUID projectId,
+            @RequestParam(required = false) String status,
+            @PageableDefault(size = 20, sort = "createdAt", direction = Sort.Direction.DESC)Pageable pageable){
+
+        log.info("HTTP GET /api/v1/handovers = SOlicitando pagina {} con tamaño {}", pageable.getPageNumber(), pageable.getPageSize());
+
+        Page<HandoverResponse> pageResult = handoverService.getHandovers(projectId, status, pageable);
+        return ResponseEntity.ok(pageResult);
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
